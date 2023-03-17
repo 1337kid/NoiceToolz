@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+{% block content %}
+<h3>Admin Panel</h3>
+<hr/>
+<div class="row"><div class="col">
+    <div class="alert alert-dark alert-lol">
+Delete Notebin records.<br/>
+<a href="/admin/?delete=paste" class="btn btn-teal" role="button" aria-pressed="true">Click Me!</a>
+    </div></div>
+<div class="col">   
+    <div class="alert alert-dark alert-lol">
+Delete url entries.<br/>
+    <a href="/admin/?delete=url" class="btn btn-teal" role="button" aria-pressed="true">Click Me!</a>
+    </div>
+</div></div>
+<hr/>
+<h5 class="text-center">Edit Admin credentials</h5>
+<div style="display:flex;justify-content: center;">
+<form method="post" action="/admin/newcreds" style="width:300px;" class="noice-stuff">
+    <div class="noice-stuff1">
+    <input class="form-control input" type="text" name="username" placeholder="New Username"><br/>
+    <input class="form-control input" type="password" name="password" placeholder="New Password"><br/>
+    <span style="text-align: center;display:block"><input type="submit" class="btn btn-teal" value="Login"></span>
+    </div>
+</form></div>
+{% endblock %}

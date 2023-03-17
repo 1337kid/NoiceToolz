@@ -1,0 +1,12 @@
+notebin:
+- NoteBin
+- A place where you can share notes/pastes/random text.
+- /?action=paste
+urlshrink:
+- URL Shrink
+- If you want to rickroll someone or shorten a large url, this is the place for you
+- /?action=shrink
+imgdb:
+- Sourcecode
+- This project is opensource and the sourcecode is available on GitHub
+- 'https://github.com/1337kid/NoiceToolz'

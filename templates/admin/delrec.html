@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+{% block content %}
+<h3>Admin Panel</h3>
+<hr/>
+<nav style="--bs-breadcrumb-divider: '>';" aria-label="breadcrumb">
+    <ol class="breadcrumb">
+      <li class="breadcrumb-item"><a href="/admin">Admin</a></li>
+      <li class="breadcrumb-item active" color="aliceblue" aria-current="page">{{lolvar}}</li>
+    </ol>
+</nav>
+<div class="table-responsive">
+<table class="table table-sm" style="color:aliceblue">
+    <thead>
+        <tr><th scope="col">ID</th><th scope="col">ACTION</th></tr>
+    </thead>
+    <tbody>
+    {% for i in data%}
+    <tr>
+        <th scope="row">{{i[0]}}</th>
+        <th><a href="/admin/delete?service={{delete}}&id={{i[0]}}" class="btn btn-teal" role="button" aria-pressed="true">Delete</a></th>
+    </tr>
+    {%endfor%}
+    </tbody>
+</table></div>
+{% endblock %}

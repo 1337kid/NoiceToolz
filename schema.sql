@@ -1,0 +1,20 @@
+CREATE TABLE IF NOT EXISTS notes (
+    id varchar(16) NOT NULL PRIMARY KEY,
+    title TEXT NOT NULL,
+    content TEXT NOT NULL
+);
+
+CREATE TABLE IF NOT EXISTS links (
+    id varchar(6) NOT NULL PRIMARY KEY,
+    link TEXT NOT NULL
+);
+
+CREATE TABLE IF NOT EXISTS admin (
+    id INT PRIMARY KEY,
+    username varchar(5) NOT NULL,
+    password TEXT NOT NULL
+);
+
+INSERT INTO admin VALUES (
+    1,'admin','sha256$DXl6cH2rGxp87Gqr$528021e83ddd8223eed216b8b819ab7a530a1d3023dc568107c64b7fc706ce75'
+) ON CONFLICT DO NOTHING;

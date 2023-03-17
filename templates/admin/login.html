@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+{% block content %}
+<h3>Admin Login</h3>
+<hr/>
+<div style="display:flex;justify-content: center;">
+<form method="post" style="width:300px;" class="noice-stuff">
+    <div class="noice-stuff1">
+    {% if error %}
+    <div class="alert alert-danger" role="alert">{{error}}</div>
+    {% endif %}
+    <input class="form-control input" type="text" name="username" placeholder="Username"><br/>
+    <input class="form-control input" type="password" name="password" placeholder="Password"><br/>
+    <span style="text-align: center;display:block"><input type="submit" class="btn btn-teal" value="Login"></span>
+    </div>
+</form></div>
+{% endblock %}

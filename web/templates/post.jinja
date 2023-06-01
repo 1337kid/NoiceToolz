@@ -1,0 +1,32 @@
+{% extends "base.jinja" %}
+{% block title %}{{paste.title}}{% endblock %}
+
+{% block content %}
+    <h4 style='padding:5px;color:white'>{{ paste.title }}</h4>
+    {% autoescape true %}
+    <pre style="padding: 10px;" class="textarea" style="height:100%">{{ paste.text }}</pre>
+    {% endautoescape %}
+<center>
+    <div class="row">
+        <div class="col">
+        {% if not user=='guest' %}
+        {% endif %}
+        User: <a href="{{url_for('views.view_user',username=user)}}">{{ user }}</a>
+        </div>
+        <div class="col">
+        Size: {{ size }} Bytes
+        </div>
+    </div><br/>
+    <div class="row">
+        <div class="col">
+        Date Created: {{paste.date}}
+        </div>
+        <div class="col">
+        <a href="{{url_for('views.view_paste',pid=paste.pid)+'?raw=true'}}">
+            <button data-bs-theme="dark" type="button" class="btn btn-outline-primary btn-outline">View raw text</button>
+        </a>
+        </div>
+    </div>
+</center>
+<hr>
+{% endblock %}

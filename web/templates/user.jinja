@@ -1,0 +1,25 @@
+{% extends "base.jinja" %}
+{% block title %}User Page : {{user}}{% endblock %}
+
+{% block content %}
+<h4>User: {{user}}</h4>
+<hr>
+<div>
+{% if pastes != [] %}
+{% for i in pastes%}
+<a style="text-decoration:none" href="{{url_for('views.view_paste',pid=i.pid)}}">
+<div class="card card_" data-bs-theme="dark">
+  <div class="card-body">
+    <h5>{{i.title}}</h5>
+    Date Created: {{i.date}}
+  </div>
+</div>
+</a>
+<br/>
+{% endfor %}
+{% else %}
+<h5>{{user}} has not created any pastes</h5>
+{% endif %}
+</div>
+<hr>
+{% endblock %}

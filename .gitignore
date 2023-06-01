@@ -1,6 +1,0 @@
-__pycache__/
-core/__pycache__/
-venv/
-database.db
-tests/
-config-pro.yml

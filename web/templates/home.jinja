@@ -1,0 +1,16 @@
+{% extends "base.jinja" %}
+{% block title %}Home Page{% endblock %}
+
+{% block content %}
+<h4>Create a paste</h4>
+<hr>
+<form method='POST'>
+<center>
+    {{form.hidden_tag()}}
+    {{form.title(class='form-control input',placeholder="Title here")}}<br/>
+    {{form.text(class='form-control textarea',placeholder='Enter text here...')}}<br/>
+    {{form.submit(class='btn btn-noice')}}
+</center>
+</form>
+<hr>
+{% endblock %}

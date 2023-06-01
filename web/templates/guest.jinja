@@ -1,0 +1,21 @@
+{% extends "base.jinja" %}
+{% block title %}Pastes by guest users{% endblock %}
+
+{% block content %}
+<h4>User: guest users</h4>
+<hr>
+<div>
+{% for i in pastes%}
+<a style="text-decoration:none" href="{{url_for('views.view_paste',pid=i.pid)}}">
+<div class="card card_" data-bs-theme="dark">
+  <div class="card-body">
+    <h5>{{i.title}}</h5>
+    Date Created: {{i.date}}
+  </div>
+</div>
+</a>
+<br/>
+{% endfor %}
+</div>
+<hr>
+{% endblock %}

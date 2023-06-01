@@ -1,0 +1,17 @@
+{% extends "base.jinja" %}
+{% block title %}Login Page{% endblock %}
+
+{% block content %}
+<h4>Sign Up</h4>
+<hr>
+<center>
+<form method='POST'>
+    {{form.hidden_tag()}}
+    {{form.username(class='form-control input',placeholder="Username")}}<br/>
+    {{form.password1(class='form-control input',placeholder='Password')}}<br/>
+    {{form.password2(class='form-control input',placeholder='Confirm Password')}}<br/>
+    {{form.submit(class='btn btn-noice')}}
+</form>
+</center>
+<hr>
+{% endblock %}

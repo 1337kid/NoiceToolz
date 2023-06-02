@@ -1,24 +1,28 @@
 {% extends "base.jinja" %}
-{% block title %}User Page : {{user}}{% endblock %}
+{% block title %}User Page : {{user.username}}{% endblock %}
 
 {% block content %}
-<h4>User: {{user}}</h4>
+<h4>User: {{user.username}}</h4>
 <hr>
 <div>
 {% if pastes != [] %}
 {% for i in pastes%}
-<a style="text-decoration:none" href="{{url_for('views.view_paste',pid=i.pid)}}">
 <div class="card card_" data-bs-theme="dark">
-  <div class="card-body">
-    <h5>{{i.title}}</h5>
-    Date Created: {{i.date}}
+  <div class="card-body w-100">
+  <a href="{{url_for('views.view_paste',pid=i.pid)}}">
+  <h6>{{i.title}}</h6></a>
+  {% if current_user.id == user.id %}
+  <div>
+  <a style="padding-right:5px" href="{{url_for('views.edit_paste',pid=i.pid)}}"><button class="btn btn-outline-success">Edit</button></a>
+  <a href="{{url_for('views.delete_paste',pid=i.pid)}}"><button class="btn btn-outline-danger">Delete</button></a>
+  </div>  
+  {% endif %}
   </div>
 </div>
-</a>
 <br/>
 {% endfor %}
 {% else %}
-<h5>{{user}} has not created any pastes</h5>
+<h5>{{user.username}} has not created any pastes</h5>
 {% endif %}
 </div>
 <hr>

@@ -1,0 +1,16 @@
+{% extends "base.jinja" %}
+{% block title %}Edit your paste{% endblock %}
+
+{% block content %}
+<h4>Edit your paste</h4>
+<hr>
+<form method='POST'>
+<center>
+    {{form.hidden_tag()}}
+    {{form.title(class='form-control input',value=paste.title)}}<br/>
+    <textarea class="form-control textarea" default="nwieorg" id="text" name="text" rows="15">{{paste.text}}</textarea><br/>
+    {{form.submit(class='btn btn-noice',value='Save paste')}}
+</center>
+</form>
+<hr>
+{% endblock %}

@@ -3,6 +3,13 @@
 
 {% block content %}
     <h4 style='padding:5px;color:white'>{{ paste.title }}</h4>
+  {% if current_user.id == paste.user %}
+  <div>
+  <a style="padding-right:5px" href="{{url_for('views.edit_paste',pid=paste.pid)}}"><button class="btn btn-outline-success">Edit</button></a>
+  <a href="{{url_for('views.delete_paste',pid=paste.pid)}}"><button class="btn btn-outline-danger">Delete</button></a>
+  </div>
+  {% endif %}
+  <hr>
     {% autoescape true %}
     <pre style="padding: 10px;" class="textarea" style="height:100%">{{ paste.text }}</pre>
     {% endautoescape %}
@@ -11,7 +18,7 @@
         <div class="col">
         {% if not user=='guest' %}
         {% endif %}
-        User: <a href="{{url_for('views.view_user',username=user)}}">{{ user }}</a>
+        User: <a href="{{url_for('views.view_user',username=user)}}"><b>{{ user }}</b></a>
         </div>
         <div class="col">
         Size: {{ size }} Bytes
@@ -23,7 +30,7 @@
         </div>
         <div class="col">
         <a href="{{url_for('views.view_paste',pid=paste.pid)+'?raw=true'}}">
-            <button data-bs-theme="dark" type="button" class="btn btn-outline-primary btn-outline">View raw text</button>
+            <button type="button" class="btn btn-noice">View raw text</button>
         </a>
         </div>
     </div>

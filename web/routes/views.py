@@ -1,8 +1,8 @@
-from flask import Blueprint,render_template,request,redirect,url_for,make_response
+from flask import Blueprint,render_template,request,redirect,url_for,make_response,flash
 from web.forms import CreatePasteForm
 from web.models import Paste,User
 from web import db
-from flask_login import current_user
+from flask_login import current_user,login_required
 import string,random
 
 views = Blueprint('views',__name__)
@@ -35,10 +35,10 @@ def home_page():
 
 @views.route('/user/<string:username>/')
 def view_user(username):
-    if username=='guest': user=0
-    else: user = User.query.filter_by(username=username).first_or_404().id
-    pastes = Paste.query.filter_by(user=user).all()
-    return render_template('user.jinja',pastes=pastes[::-1],user=username)
+    if username=='guest': user=User(id=0,username='guest')
+    else: user = User.query.filter_by(username=username).first_or_404()
+    pastes = Paste.query.filter_by(user=user.id).all()
+    return render_template('user.jinja',pastes=pastes[::-1],user=user)
 
 @views.route('/paste/<string:pid>')
 def view_paste(pid):
@@ -52,4 +52,34 @@ def view_paste(pid):
             response = make_response(paste.text, 200)
             response.mimetype = "text/plain"
             return response
-        else: return render_template('post.jinja',paste=paste,size=len(paste.text),user=user)
+        else: return render_template('paste.jinja',paste=paste,size=len(paste.text),user=user)
+
+@views.route('/editpaste/<pid>',methods=['POST','GET'])
+@login_required
+def edit_paste(pid):
+    form = CreatePasteForm()
+    paste = Paste.query.filter_by(pid=pid).first()
+    if current_user.id == paste.user:
+        if form.validate_on_submit():
+            paste.title = form.title.data
+            print(form.title.data)
+            paste.text = form.text.data
+            db.session.commit()
+            return redirect(url_for('views.view_paste',pid=pid))
+    else:
+        flash('You dont have permission to edit this paste',category='danger')
+        return redirect(url_for('views.view_paste',pid=pid))
+    return render_template('edit_paste.jinja',form=form,paste=paste)
+
+@views.route('/deletepaste/<pid>')
+@login_required
+def delete_paste(pid):
+    paste = Paste.query.filter_by(pid=pid).first()
+    if current_user.id==paste.user:
+        db.session.delete(paste)
+        db.session.commit()
+        flash(f'Paste with ID "{pid}" was deleted',category='success')
+        return redirect(url_for('views.view_user',username=current_user.username))
+    else:
+        flash(f"You don't have permission to delete the paste with id \"{pid}\"",category='danger')
+        return redirect(url_for('views.view_paste',pid=pid))
